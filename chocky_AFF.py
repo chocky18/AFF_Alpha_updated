@@ -807,8 +807,13 @@ __name__ == "__main__"
             def on_submit_clicked():
                 global fileLoaded,file_path
                 url = url_input.text()  # Get the URL from the input box
+                # url = url_input.text()  # Get the URL from the input box
                 if url:
-                    _crawler.goToURL(url)
+                    try:
+                        _crawler.goToURL(url)
+                    except Exception as e:
+                        print(f"Error loading URL: {e}")
+                        pdfCall()
                 
                 if not fileLoaded:
                     print("Loading...")
@@ -854,7 +859,7 @@ __name__ == "__main__"
                                 
                                 
 
-                                click_keywords = ['NEXT','OK','Submit']
+                                click_keywords = ['NEXT','OK','Submit','submit']
 
                                 if any(keyword in key for keyword in click_keywords):
                                     print("key in click ",key)
